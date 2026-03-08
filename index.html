@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ObesityIQ — Predict Your Health Risk</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="bg-wrap" aria-hidden="true">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<header>
+  <div class="brand">Obesity<span>IQ</span></div>
+  <p class="brand-sub">XGBoost · 20 758 samples · 7-class classifier</p>
+</header>
+
+<main>
+
+  <!-- FORM CARD -->
+  <div class="card" id="formCard">
+    <div class="card-head">
+      <h1>Health Risk Predictor</h1>
+      <p>Fill in all fields — prediction is instant.</p>
+    </div>
+
+    <form id="mainForm" novalidate>
+
+      <div class="section-title"><span class="dot"></span> Physical Measurements</div>
+      <div class="grid g4">
+        <div class="field">
+          <label for="Gender">Gender</label>
+          <select id="Gender" name="Gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="Age">Age <em>years</em></label>
+          <input id="Age" name="Age" type="number" min="10" max="100" step="0.1" placeholder="e.g. 24" required/>
+        </div>
+        <div class="field">
+          <label for="Height">Height <em>metres</em></label>
+          <input id="Height" name="Height" type="number" min="1.0" max="2.5" step="0.001" placeholder="e.g. 1.70" required/>
+        </div>
+        <div class="field">
+          <label for="Weight">Weight <em>kg</em></label>
+          <input id="Weight" name="Weight" type="number" min="20" max="300" step="0.01" placeholder="e.g. 81.6" required/>
+        </div>
+      </div>
+
+      <div class="section-title"><span class="dot"></span> Diet &amp; Eating Habits</div>
+      <div class="grid g4">
+        <div class="field">
+          <label for="FAVC">High-Cal Food (FAVC)</label>
+          <select id="FAVC" name="FAVC" required>
+            <option value="">Select</option>
+            <option>yes</option>
+            <option>no</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="FCVC">Veggies / meal <em>1–3</em></label>
+          <input id="FCVC" name="FCVC" type="number" min="1" max="3" step="0.01" placeholder="e.g. 2.0" required/>
+        </div>
+        <div class="field">
+          <label for="NCP">Main meals / day</label>
+          <input id="NCP" name="NCP" type="number" min="1" max="6" step="0.01" placeholder="e.g. 3.0" required/>
+        </div>
+        <div class="field">
+          <label for="CAEC">Eating between meals</label>
+          <select id="CAEC" name="CAEC" required>
+            <option value="">Select</option>
+            <option>no</option>
+            <option>Sometimes</option>
+            <option>Frequently</option>
+            <option>Always</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid g4">
+        <div class="field">
+          <label for="CH2O">Water / day <em>litres 1–3</em></label>
+          <input id="CH2O" name="CH2O" type="number" min="1" max="3" step="0.01" placeholder="e.g. 2.0" required/>
+        </div>
+        <div class="field">
+          <label for="CALC">Alcohol (CALC)</label>
+          <select id="CALC" name="CALC" required>
+            <option value="">Select</option>
+            <option>no</option>
+            <option>Sometimes</option>
+            <option>Frequently</option>
+            <option>Always</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="SCC">Monitor calories?</label>
+          <select id="SCC" name="SCC" required>
+            <option value="">Select</option>
+            <option>yes</option>
+            <option>no</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="SMOKE">Smoker?</label>
+          <select id="SMOKE" name="SMOKE" required>
+            <option value="">Select</option>
+            <option>yes</option>
+            <option>no</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-title"><span class="dot"></span> Activity &amp; Background</div>
+      <div class="grid g4">
+        <div class="field">
+          <label for="family_history_with_overweight">Family overweight history</label>
+          <select id="family_history_with_overweight" name="family_history_with_overweight" required>
+            <option value="">Select</option>
+            <option>yes</option>
+            <option>no</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="FAF">Physical activity <em>days/wk</em></label>
+          <input id="FAF" name="FAF" type="number" min="0" max="3" step="0.01" placeholder="e.g. 1.0" required/>
+        </div>
+        <div class="field">
+          <label for="TUE">Screen time <em>hrs/day</em></label>
+          <input id="TUE" name="TUE" type="number" min="0" max="3" step="0.01" placeholder="e.g. 1.0" required/>
+        </div>
+        <div class="field">
+          <label for="MTRANS">Transport mode</label>
+          <select id="MTRANS" name="MTRANS" required>
+            <option value="">Select</option>
+            <option value="Public_Transportation">Public Transport</option>
+            <option value="Automobile">Automobile</option>
+            <option value="Walking">Walking</option>
+            <option value="Motorbike">Motorbike</option>
+            <option value="Bike">Bike</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn">
+        <span class="btn-label">Predict Obesity Level</span>
+        <span class="btn-spin" style="display:none">Analysing…</span>
+      </button>
+
+      <p class="err-msg" id="errMsg" style="display:none"></p>
+
+    </form>
+  </div>
+
+  <!-- RESULT CARD -->
+  <div class="card result-card" id="resultCard" style="display:none">
+
+    <div class="card-head">
+      <h2>Prediction Result</h2>
+    </div>
+
+    <div class="result-hero">
+      <div class="verdict-box" id="verdictBox">
+        <span class="verdict-label" id="verdictLabel">—</span>
+        <span class="verdict-sub">Predicted Class</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num" id="statBMI">—</span>
+          <span class="stat-lbl">BMI</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" id="statConf">—</span>
+          <span class="stat-lbl">Confidence</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" id="statBMICat">—</span>
+          <span class="stat-lbl">WHO Category</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scale-section">
+      <div class="scale-row-label">
+        <span>BMI Scale</span>
+        <span class="scale-bmi-badge" id="scaleBMIVal">—</span>
+      </div>
+      <div class="scale-track">
+        <div class="scale-gradient"></div>
+        <div class="scale-needle" id="scaleNeedle"></div>
+      </div>
+      <div class="scale-ticks">
+        <span>10</span><span>18.5</span><span>25</span><span>30</span><span>40+</span>
+      </div>
+    </div>
+
+    <div class="probs-section">
+      <div class="section-title sm"><span class="dot"></span> All Class Probabilities</div>
+      <div id="probsContainer"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-outline" onclick="resetUI()">← New Prediction</button>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
